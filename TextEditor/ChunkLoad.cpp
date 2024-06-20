@@ -14,7 +14,7 @@ ChunkLoad::~ChunkLoad()
 
 char* ChunkLoad::LoadChunk()
 {
-	FILE* file = fopen(filename, "rt");
+	file = fopen(filename, "r");
 	if (file == NULL)
 	{
 		return NULL;

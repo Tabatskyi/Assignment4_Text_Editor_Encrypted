@@ -10,7 +10,8 @@ public:
 	bool SaveChunk(char* chunk);
 
 private:
-		char* filename;
-		char* chunk;
+	char* filename;
+	char* chunk;
+	FILE* file;
 };
 

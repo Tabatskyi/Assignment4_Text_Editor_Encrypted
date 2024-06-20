@@ -13,6 +13,7 @@ public:
     ~CaesarCifer();
     bool Encrypt(char* inputFile, char* outputFile, int shift);
     bool Decrypt(char* inputFile, char* outputFile, int shift);
+    char* shiftChars(char* text, int shift);
 
 private:
     HINSTANCE handle;

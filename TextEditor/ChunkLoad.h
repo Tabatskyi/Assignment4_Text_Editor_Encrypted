@@ -12,5 +12,6 @@ private:
 	char* chunk;
 	unsigned int size;
 	char* filename;
+	FILE* file;
 };
 

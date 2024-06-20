@@ -3,6 +3,7 @@
 ChunkSave::ChunkSave(char* filename)
 {
 	this->filename = filename;
+	char* chunk = nullptr;
 }
 
 ChunkSave::~ChunkSave()
@@ -13,13 +14,14 @@ ChunkSave::~ChunkSave()
 bool ChunkSave::SaveChunk(char* chunk)
 {
 	unsigned int size = strlen(chunk);
-	FILE* file = fopen(filename, "wt");
+	file = fopen(filename, "w");
 	if (file == NULL)
 	{
 		return false;
 	}
 
-	fwrite(chunk, sizeof(char), size, file);
+	//fwrite(chunk, sizeof(char), size, file);
+	fprintf(file, "%s", chunk);
 	fclose(file);
 
 	return true;

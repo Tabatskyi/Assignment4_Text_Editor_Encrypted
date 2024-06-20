@@ -2,7 +2,7 @@
 
 CaesarCifer::CaesarCifer()
 {
-    handle = LoadLibrary(TEXT("CaesarCifer.dll"));
+    /*handle = LoadLibrary(TEXT("CaesarCifer.dll"));
     if (handle == nullptr || handle == INVALID_HANDLE_VALUE) 
     {
         std::cout << "DLL not found\n";
@@ -14,7 +14,7 @@ CaesarCifer::CaesarCifer()
 {
         std::cout << "Function not found\n";
         return;
-    }
+    }*/
 }
 
 CaesarCifer::~CaesarCifer() 
@@ -32,6 +32,29 @@ bool CaesarCifer::Decrypt(char* inputFile, char* outputFile, int shift)
     return shiftFileContents(inputFile, outputFile, -shift);
 }
 
+char* CaesarCifer::shiftChars(char* text, int shift)
+{
+    for (int i = 0; text[i] != '\0'; i++)
+    {
+        int shiftedChar = (int)text[i];
+        if ((shiftedChar >= 'a' && shiftedChar <= 'z') || (shiftedChar >= 'A' && shiftedChar <= 'Z'))
+        {
+            shiftedChar += shift;
+
+            if ((shiftedChar > 'Z' && text[i] < 'a') || shiftedChar > 'z')
+            {
+                shiftedChar -= 26;
+            }
+            else if ((shiftedChar < 'a' && text[i] >= 'a') || shiftedChar < 'A')
+            {
+                shiftedChar += 26;
+            }
+            text[i] = (char)shiftedChar;
+        }
+    }
+    return text;
+}
+
 bool CaesarCifer::shiftFileContents(char* inputFile, char* outputFile, int shift) 
 {
     ChunkLoad loader(inputFile, 1024);
@@ -40,7 +63,8 @@ bool CaesarCifer::shiftFileContents(char* inputFile, char* outputFile, int shift
     char* textChunk;
     while ((textChunk = loader.LoadChunk()) != NULL) 
     {
-        char* shiftedText = shiftChar_ptr(textChunk, shift);
+        //char* shiftedText = shiftChar_ptr(textChunk, shift);
+        char* shiftedText = shiftChars(textChunk, shift);
         if (!saver.SaveChunk(shiftedText)) 
         {
             std::cout << "Error saving chunk.\n";

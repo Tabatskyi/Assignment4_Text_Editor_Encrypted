@@ -10,6 +10,7 @@
 #include "Paste.h"
 #include "Replace.h"
 #include "Coursor.h"
+#include "CaesarCifer.h"
 #include <Windows.h>
 
 using namespace std;
@@ -269,43 +270,38 @@ int main()
 		}
         else if (command == '/')
         {
+            char inputFilename[100], outputFilename[100];
             int shift;
-            cout << ">Enter shift amount to encode: ";
+            cout << ">Enter input filename: ";
+            cin >> inputFilename;
+            cout << ">Enter output filename: ";
+            cin >> outputFilename;
+            cout << ">Enter shift for encoding: ";
             cin >> shift;
 
-            if (shift > 26)
-                shift %= 26;
-
-            for (int i = 0; i <= memory->currentLine; i++)
-            {
-                char* newLine = shiftChars(memory->textMemory[i], shift);
-                memory->textMemory[i] = newLine;
-            }
-		}
+            CaesarCifer cifer;
+            if (!cifer.Encrypt(inputFilename, outputFilename, shift))
+                cout << "Error during encoding.\n";
+            else
+                cout << "File encoded successfully.\n";
+        }
         else if (command == '\\')
         {
+            char inputFilename[100], outputFilename[100];
             int shift;
-            cout << ">Enter shift amount to decode: ";
+            cout << ">Enter input filename: ";
+            cin >> inputFilename;
+            cout << ">Enter output filename: ";
+            cin >> outputFilename;
+            cout << ">Enter shift for decoding: ";
             cin >> shift;
 
-            if (shift > 26)
-                shift %= 26;
-
-            int chunkSize = 10;
-            int numChunks = (memory->currentLine + 1) / chunkSize;
-
-            for (int chunk = 0; chunk <= numChunks; chunk++)
-            {
-                int startLine = chunk * chunkSize;
-                int endLine = min((chunk + 1) * chunkSize, memory->currentLine + 1);
-
-                for (int i = startLine; i < endLine; i++)
-                {
-                    char* newLine = shiftChars(memory->textMemory[i], -shift);
-                    memory->textMemory[i] = newLine;
-                }
-            }
-	    }
+            CaesarCifer cifer;
+            if (!cifer.Decrypt(inputFilename, outputFilename, shift))
+                cout << "Error during decoding.\n";
+            else
+                cout << "File decoded successfully.\n";
+        }
         else 
             cout << ">unknown command\n";
 
