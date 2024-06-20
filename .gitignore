@@ -366,3 +366,4 @@ FodyWeavers.xsd
 *.exe
 *.lib
 *.exp
+/o.txt
