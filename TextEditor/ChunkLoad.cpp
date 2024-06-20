@@ -5,16 +5,17 @@ ChunkLoad::ChunkLoad(char* filename, unsigned int size)
 {
 	this->filename = filename;
 	this->size = size;
+	file = fopen(filename, "r");
 }
 
 ChunkLoad::~ChunkLoad()
 {
 	delete[] chunk;
+	fclose(file);
 }
 
 char* ChunkLoad::LoadChunk()
 {
-	file = fopen(filename, "r");
 	if (file == NULL)
 	{
 		return NULL;
@@ -22,7 +23,6 @@ char* ChunkLoad::LoadChunk()
 
 	chunk = new char[size];
 	fread(chunk, sizeof(char), size, file);
-	fclose(file);
 
 	return chunk;
 }

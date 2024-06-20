@@ -3,26 +3,24 @@
 ChunkSave::ChunkSave(char* filename)
 {
 	this->filename = filename;
-	char* chunk = nullptr;
+	file = fopen(filename, "w");
 }
 
 ChunkSave::~ChunkSave()
 {
-	delete[] chunk;
+	fclose(file);
 }
 
-bool ChunkSave::SaveChunk(char* chunk)
+bool ChunkSave::SaveChunk(char* text)
 {
-	unsigned int size = strlen(chunk);
-	file = fopen(filename, "w");
+	size_t size = strlen(text);
 	if (file == NULL)
 	{
 		return false;
 	}
 
-	//fwrite(chunk, sizeof(char), size, file);
-	fprintf(file, "%s", chunk);
-	fclose(file);
+	fwrite(text, sizeof(char), size, file);
+	//fprintf(file, "%s", chunk);
 
 	return true;
 }

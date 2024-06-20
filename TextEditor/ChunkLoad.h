@@ -10,7 +10,7 @@ public:
 	char* LoadChunk();
 private:
 	char* chunk;
-	unsigned int size;
+	size_t size;
 	char* filename;
 	FILE* file;
 };
