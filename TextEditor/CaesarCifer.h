@@ -1,8 +1,9 @@
 #pragma once
 #include <windows.h>
 #include <iostream>
-#include "ChunkLoad.h"
-#include "ChunkSave.h"
+#include <fstream>
+
+using namespace std;
 
 typedef char* (*shiftChar_ptr_t)(char*, int);
 
@@ -18,6 +19,7 @@ public:
 private:
     HINSTANCE handle;
     shiftChar_ptr_t shiftChar_ptr;
+    size_t size;
     bool shiftFileContents(char* inputFile, char* outputFile, int shift);
 
 };

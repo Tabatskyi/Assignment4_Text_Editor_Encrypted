@@ -15,6 +15,7 @@ CaesarCifer::CaesarCifer()
         std::cout << "Function not found\n";
         return;
     }*/
+    size = 1024;
 }
 
 CaesarCifer::~CaesarCifer() 
@@ -55,21 +56,29 @@ char* CaesarCifer::shiftChars(char* text, int shift)
     return text;
 }
 
-bool CaesarCifer::shiftFileContents(char* inputFile, char* outputFile, int shift) 
+bool CaesarCifer::shiftFileContents(char* inputFile, char* outputFile, int shift)
 {
-    ChunkLoad loader(inputFile, 1024);
-    ChunkSave saver(outputFile);
+    char* chunk = new char[size];
+    char* newText = new char[size];
 
-    char* textChunk;
-    while ((textChunk = loader.LoadChunk()) != NULL) 
+    ifstream fin(inputFile);
+    ofstream fout(outputFile);
+
+    if (!fin.is_open() || !fout.is_open())
+	{
+		cout << "Error opening file\n";
+		return false;
+	}
+
+    while (fin)
     {
-        //char* shiftedText = shiftChar_ptr(textChunk, shift);
-        char* shiftedText = shiftChars(textChunk, shift);
-        if (!saver.SaveChunk(shiftedText)) 
-        {
-            std::cout << "Error saving chunk.\n";
-            return false;
-        }
+        fin.read(chunk, size);
+        size_t count = fin.gcount();
+        if (!count)
+            break;
+        newText = shiftChars(chunk, shift);
+        fout.write(newText, count);
     }
+
     return true;
-};
+}
