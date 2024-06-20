@@ -1,5 +1,5 @@
 #pragma once
-#include <iostream>
+#include "Command.h"
 
 class ChunkLoad
 {

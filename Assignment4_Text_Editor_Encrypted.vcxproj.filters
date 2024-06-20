@@ -54,10 +54,13 @@
     <ClCompile Include="TextEditor\SaveToFile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ChunkLoad.cpp">
+    <ClCompile Include="TextEditor\CaesarCifer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ChunkSave.cpp">
+    <ClCompile Include="TextEditor\ChunkLoad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TextEditor\ChunkSave.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -104,13 +107,16 @@
     <ClInclude Include="TextEditor\SaveToFile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
+    <ClInclude Include="TextEditor\CaesarCifer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ChunkLoad.h">
+    <ClInclude Include="TextEditor\ChunkLoad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ChunkSave.h">
+    <ClInclude Include="TextEditor\ChunkSave.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextEditor\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

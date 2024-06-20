@@ -1,11 +1,13 @@
 #pragma once
+#include "Command.h"
+
 class ChunkSave
 {
 public:
-	ChunkSave(char* chunk, char* filename);
+	ChunkSave(char* filename);
 	~ChunkSave();
 
-	void SaveChunk();
+	bool SaveChunk(char* chunk);
 
 private:
 		char* chunk;

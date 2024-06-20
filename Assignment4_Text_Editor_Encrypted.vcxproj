@@ -137,9 +137,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ChunkLoad.cpp" />
-    <ClCompile Include="ChunkSave.cpp" />
     <ClCompile Include="TextEditor\Append.cpp" />
+    <ClCompile Include="TextEditor\CaesarCifer.cpp" />
+    <ClCompile Include="TextEditor\ChunkLoad.cpp" />
+    <ClCompile Include="TextEditor\ChunkSave.cpp" />
     <ClCompile Include="TextEditor\Copy.cpp" />
     <ClCompile Include="TextEditor\Coursor.cpp" />
     <ClCompile Include="TextEditor\Cut.cpp" />
@@ -154,10 +155,10 @@
     <ClCompile Include="TextEditor\SaveToFile.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ChunkLoad.h" />
-    <ClInclude Include="ChunkSave.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="TextEditor\Append.h" />
+    <ClInclude Include="TextEditor\CaesarCifer.h" />
+    <ClInclude Include="TextEditor\ChunkLoad.h" />
+    <ClInclude Include="TextEditor\ChunkSave.h" />
     <ClInclude Include="TextEditor\Command.h" />
     <ClInclude Include="TextEditor\Copy.h" />
     <ClInclude Include="TextEditor\Coursor.h" />
@@ -169,6 +170,7 @@
     <ClInclude Include="TextEditor\NewLine.h" />
     <ClInclude Include="TextEditor\Paste.h" />
     <ClInclude Include="TextEditor\Replace.h" />
+    <ClInclude Include="TextEditor\resource.h" />
     <ClInclude Include="TextEditor\RevertableCommand.h" />
     <ClInclude Include="TextEditor\SaveToFile.h" />
   </ItemGroup>

@@ -26,30 +26,30 @@ static bool validatePosition(unsigned int line, unsigned int index, Memory* memo
 }
 
 
-static char* shiftChars(char* text, int shift)
-{
-    typedef char*(*shiftChar_ptr_t)(char*, int);
-
-    HINSTANCE handle = LoadLibrary(TEXT("CaesarCifer.dll"));
-    if (handle == nullptr || handle == INVALID_HANDLE_VALUE)
-    {
-        cout << "DLL not found\n";
-        return nullptr;
-    }
-
-    shiftChar_ptr_t shiftChar_ptr = (shiftChar_ptr_t)GetProcAddress(handle, "shiftChars");
-    if (shiftChar_ptr == nullptr)
-    {
-        cout << "Function not found\n";
-        return nullptr;
-    }
-
-    char* newText = shiftChar_ptr(text, shift);
-
-    FreeLibrary(handle);
-
-    return newText;
-}
+//static char* shiftChars(char* text, int shift)
+//{
+//    typedef char*(*shiftChar_ptr_t)(char*, int);
+//
+//    HINSTANCE handle = LoadLibrary(TEXT("CaesarCifer.dll"));
+//    if (handle == nullptr || handle == INVALID_HANDLE_VALUE)
+//    {
+//        cout << "DLL not found\n";
+//        return nullptr;
+//    }
+//
+//    shiftChar_ptr_t shiftChar_ptr = (shiftChar_ptr_t)GetProcAddress(handle, "shiftChars");
+//    if (shiftChar_ptr == nullptr)
+//    {
+//        cout << "Function not found\n";
+//        return nullptr;
+//    }
+//
+//    char* newText = shiftChar_ptr(text, shift);
+//
+//    FreeLibrary(handle);
+//
+//    return newText;
+//}
 
 
 int main()
@@ -289,12 +289,21 @@ int main()
             cin >> shift;
 
             if (shift > 26)
-				shift %= 26;
+                shift %= 26;
 
-            for (int i = 0; i <= memory->currentLine; i++)
+            int chunkSize = 10;
+            int numChunks = (memory->currentLine + 1) / chunkSize;
+
+            for (int chunk = 0; chunk <= numChunks; chunk++)
             {
-                char* newLine = shiftChars(memory->textMemory[i], -shift);
-                memory->textMemory[i] = newLine;
+                int startLine = chunk * chunkSize;
+                int endLine = min((chunk + 1) * chunkSize, memory->currentLine + 1);
+
+                for (int i = startLine; i < endLine; i++)
+                {
+                    char* newLine = shiftChars(memory->textMemory[i], -shift);
+                    memory->textMemory[i] = newLine;
+                }
             }
 	    }
         else 
