@@ -1,19 +1,21 @@
 #include "CaesarCifer.h"
 
 CaesarCifer::CaesarCifer()
+{
+    handle = LoadLibrary(TEXT("CaesarCifer.dll"));
+    if (handle == nullptr || handle == INVALID_HANDLE_VALUE) 
     {
-        handle = LoadLibrary(TEXT("CaesarCifer.dll"));
-        if (handle == nullptr || handle == INVALID_HANDLE_VALUE) {
-            std::cout << "DLL not found\n";
-            return;
-        }
-
-        shiftChar_ptr = (shiftChar_ptr_t)GetProcAddress(handle, "shiftChars");
-        if (shiftChar_ptr == nullptr) {
-            std::cout << "Function not found\n";
-            return;
-        }
+        std::cout << "DLL not found\n";
+        return;
     }
+
+    shiftChar_ptr = (shiftChar_ptr_t)GetProcAddress(handle, "shiftChars");
+    if (shiftChar_ptr == nullptr) 
+{
+        std::cout << "Function not found\n";
+        return;
+    }
+}
 
 CaesarCifer::~CaesarCifer() 
 {
@@ -36,9 +38,11 @@ bool CaesarCifer::shiftFileContents(char* inputFile, char* outputFile, int shift
     ChunkSave saver(outputFile);
 
     char* textChunk;
-    while ((textChunk = loader.LoadChunk()) != NULL) {
+    while ((textChunk = loader.LoadChunk()) != NULL) 
+    {
         char* shiftedText = shiftChar_ptr(textChunk, shift);
-        if (!saver.SaveChunk(shiftedText)) {
+        if (!saver.SaveChunk(shiftedText)) 
+        {
             std::cout << "Error saving chunk.\n";
             return false;
         }

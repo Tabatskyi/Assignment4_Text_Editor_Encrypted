@@ -21,7 +21,7 @@ char* ChunkLoad::LoadChunk()
 	}
 
 	chunk = new char[size];
-	fread(chunk, 1, size, file);
+	fread(chunk, sizeof(char), size, file);
 	fclose(file);
 
 	return chunk;
