@@ -137,6 +137,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChunkLoad.cpp" />
+    <ClCompile Include="ChunkSave.cpp" />
     <ClCompile Include="TextEditor\Append.cpp" />
     <ClCompile Include="TextEditor\Copy.cpp" />
     <ClCompile Include="TextEditor\Coursor.cpp" />
@@ -152,6 +154,8 @@
     <ClCompile Include="TextEditor\SaveToFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ChunkLoad.h" />
+    <ClInclude Include="ChunkSave.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TextEditor\Append.h" />
     <ClInclude Include="TextEditor\Command.h" />
